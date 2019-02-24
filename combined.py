@@ -18,11 +18,9 @@ from pydub import AudioSegment
 #from pocketsphinx import AudioFile
 import wave
 
-from comtypes.client import CreateObject
-from comtypes.gen import SpeechLib
 
 #ffmpeg debugger
-import logging
+#import logging
 
 
 url = "http://www.quotationspage.com/random.php"
@@ -41,24 +39,42 @@ wav_file = "quote.wav"
 print(file, wav_file)
 
 
-engine = CreateObject("SAPI.SpVoice")
-stream = CreateObject("SAPI.SpFileStream")
+import os 
+import platform
+import sys
 
-stream.Open(wav_file, SpeechLib.SSFMCreateForWrite)
-engine.AudioOutputStream = stream
-engine.speak(quote)
-stream.Close()
+operatingSystem = sys.platform
+print ("Operating System: " + operatingSystem)
 
-#tts = gTTS(text=quote, lang='en')
-#tts.save(file)
 
-#sound = AudioSegment.from_mp3(file)
-#sound.export("quote.wav", format="wav")
+if (operatingSystem == 'linux'):
+    from gtts import gTTS
+    tts = gTTS(text=words, lang='en')
 
-#file = "./" + file
-#sound = AudioSegment.from_mp3(file)
-#sound.export("quote.wav", format="wav")
+    tts.save("good.wav")
+    os.system("mpg123 good.wav")
 
+    tts = gTTS(text=quote, lang='en')
+    tts.save(file)
+
+    sound = AudioSegment.from_mp3(file)
+    sound.export("quote.wav", format="wav")
+
+    file = "./" + file
+    sound = AudioSegment.from_mp3(file)
+    sound.export("quote.wav", format="wav")
+
+if (operatingSystem == 'win32'):
+    engine = CreateObject("SAPI.SpVoice")
+    stream = CreateObject("SAPI.SpFileStream")
+
+    stream.Open(wav_file, SpeechLib.SSFMCreateForWrite)
+    engine.AudioOutputStream = stream
+    engine.speak(quote)
+    stream.Close()
+
+    from comtypes.client import CreateObject
+    from comtypes.gen import SpeechLib
 
 print ("Playing: " + wav_file)
 #wav_file = "quote.wav"
