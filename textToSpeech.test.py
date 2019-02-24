@@ -15,6 +15,7 @@ if (operatingSystem == 'linux'):
     os.system("mpg123 good.wav")
 if (operatingSystem == 'win32'):
     import pyttsx3
+    import pywin32
     engine = pyttsx.init()
     engine.say(words)
     engine.runAndWait()
