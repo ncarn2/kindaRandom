@@ -107,23 +107,6 @@ while mixer.music.get_busy():
 mixer.quit()
 print ("Done Playing")
 
-r = sr.Recognizer()
-with sr.AudioFile(wav_file) as source:
-    audio = r.record(source)
-
-try:
-    with open("spokenQuote Transcript.txt", "w+") as tf:
-        tf.write(r.recognize_sphinx(audio)+ "\n")
-    #t2 = time.time()
-        #print("Transcript Complete for " + str(splice))
-        #print("Time: %.2f seconds" % round(t2-t1,2))
-except sr.UnknownValueError:
-    print("Sphinx could not understand audio")
-except sr.RequestError as e:
-    print("Sphinx error; {0}".format(e))
-
-
-
 #Beginning of the twilio and Flask
 from flask import Flask
 from twilio.twiml.voice_response import VoiceResponse
