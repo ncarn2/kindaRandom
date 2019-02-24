@@ -9,5 +9,5 @@ tts.save("good.wav")
 #os.system("mpg123 good.mp3")
 
 mixer.init()
-mixer.music.load(good.wav)
+mixer.music.load("good.wav")
 mixer.music.play()
