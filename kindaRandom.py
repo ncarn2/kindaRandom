@@ -83,7 +83,7 @@ def displayImage():
                     image(x,y, 'Welcome3.jpg')
                     drawButtons()
                 if pos[0] > 700 and pos[0] < 900 and pos[1] > 500 and pos[1] < 550:
-                    os.system('python ./combined.py')
+                    textToSpeechBot()
                 if pos[0] > 400 and pos[0] < 600 and pos[1] > 600 and pos[1] < 650:
                     exit()
         
@@ -215,16 +215,17 @@ def textToSpeechBot():
 
 
     lastTelephone = quote 
-
+    phoneNumberToCall = input("What is your phone number ?")
     query = ''.join(quote.split())
-
+    phoneNumberToCall = phoneNumberToCall.replace(' ','').replace('-', '').replace('(', '').replace(')', '')
+    print (phoneNumberToCall)
     account_sid = 'AC7119e83de9a686d0d56bc8491d80526a'
     auth_token = 'fcf3e5c1691051282836a49d26ff38c4'
     client = Client(account_sid, auth_token)
 
     call = client.calls.create (
             url = 'https://handler.twilio.com/twiml/EH06f621851a96b743015a43371effcf68?Message=' + query,  
-            to='+17203181646',
+            to='+1' + phoneNumberToCall,
             from_='+17207704132'
                     )
 
