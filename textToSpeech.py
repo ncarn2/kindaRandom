@@ -6,7 +6,7 @@ from gtts import gTTS
 import time
 
 words = 'Good morning I am a sad robittt oh whale'
-file = "goodw.mp3"
+file = "good.mp3"
 
 tts = gTTS(text=words, lang='en')
 tts.save(file)
