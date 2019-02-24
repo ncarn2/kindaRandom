@@ -29,26 +29,30 @@ def getFace():
 
 def image(x, y, imageFile):
     if type(imageFile)==str:
-        gameDisplay.blit(pygame.image.load(imageFile), (x,y))
+        img = pygame.image.load(imageFile)
+        img = pygame.transform.scale(img,(500,200))
+        gameDisplay.blit(img, (x,y))
     else:
         gameDisplay.blit(imageFile, (x, y))
 
+gameDisplay.fill(white)
+x = display_width/5
+y = display_height/5
+image(x,y, 'Welcome.jpg')
+pygame.display.update()
+time.sleep(2)
+image(x,y, 'Welcome2.jpg')
+pygame.display.update()
+time.sleep(0.5)
+image(x,y, 'Welcome3.jpg')
+pygame.display.update()
 
 while not crashed:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             crashed = True
-    x = display_width/5
-    y = display_height/5
-    gameDisplay.fill(white)
     #image(x + 200,y + 300, faceImage)
-    image(x,y, 'Welcome.jpg')
-    time.sleep(1)
-    image(x,y, 'Welcome2.jpg')
-    time.sleep(1)
-    image(x,y, 'Welcome3.jpg')
-
-    pygame.display.update()
+    
     clock.tick(60)
 
 pygame.quit()
