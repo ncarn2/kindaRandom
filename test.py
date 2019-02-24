@@ -1,4 +1,4 @@
-from comtypes.client import CreateObject
+'''from comtypes.client import CreateObject
 engine = CreateObject("SAPI.SpVoice")
 stream = CreateObject("SAPI.SpFileStream")
 infile = "randomQuote.txt"
@@ -11,3 +11,7 @@ theText = f.read()
 f.close()
 engine.speak(theText)
 stream.Close()
+'''
+import win32com.client as wincl
+speak = wincl.Dispatch("SAPI.SpVoice")
+speak.Speak("This is the pc voice speaking")

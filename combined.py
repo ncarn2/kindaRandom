@@ -90,13 +90,14 @@ if (operatingSystem == 'win32'):
 
     from comtypes.gen import SpeechLib
 
-    #stream.Open(wav_file, SpeechLib.SSFMCreateForWrite)        ERRORS NEAR HERE
-    #engine.AudioOutputStream = stream                          MAYBE HERE :(
-    #engine.speak(quote)
-    #stream.Close()
+    stream.Open(wav_file, SpeechLib.SSFMCreateForWrite)       # ERRORS NEAR HERE
+    engine.AudioOutputStream = stream                         # MAYBE HERE :(
+    engine.speak(quote)
+    stream.Close()
 
-    mixer.music.load(wav_file)
-    mixer.music.play()
+    import win32com.client as wincl
+    speak = wincl.Dispatch("SAPI.SpVoice")
+    speak.Speak(quote)
 
 print ("Playing: " + wav_file)
 #This went to quickyl and slowed down the CPU
