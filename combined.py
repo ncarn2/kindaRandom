@@ -17,6 +17,8 @@ with contextlib.redirect_stdout(None):
 from pydub import AudioSegment
 #from pocketsphinx import AudioFile
 import wave
+#ffmpeg debugger
+import logging
 
 url = "http://www.quotationspage.com/random.php"
 request = urllib.request.Request(url)
@@ -36,6 +38,7 @@ print(file, wav_file)
 tts = gTTS(text=quote, lang='en')
 tts.save(file)
 
+file = "./" + file
 sound = AudioSegment.from_mp3(file)
 sound.export("quote.wav", format="wav")
 
