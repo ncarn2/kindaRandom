@@ -70,9 +70,11 @@ if (operatingSystem == 'linux'):
 
 if (operatingSystem == 'win32'):
     from comtypes.client import CreateObject
-    from comtypes.gen import SpeechLib
+    
     engine = CreateObject("SAPI.SpVoice")
     stream = CreateObject("SAPI.SpFileStream")
+
+    from comtypes.gen import SpeechLib
 
     stream.Open(wav_file, SpeechLib.SSFMCreateForWrite)
     engine.AudioOutputStream = stream
