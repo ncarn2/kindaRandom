@@ -65,7 +65,6 @@ if (operatingSystem == 'linux'):
     sound = AudioSegment.from_mp3(file)
     sound.export("quote.wav", format="wav")
 
-    mixer.init()
     mixer.music.load(wav_file)
     mixer.music.play()
 
