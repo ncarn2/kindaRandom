@@ -13,6 +13,9 @@ pygame.display.set_caption('this statement is false')
 black = (0,0,0)
 white = (255,255,255)
 
+pygame.font.init()
+myfont = pygame.font.SysFont('Comic Sans MS', 30)
+
 clock = pygame.time.Clock()
 crashed = False
 #want this to be a random image from that website
@@ -46,13 +49,23 @@ pygame.display.update()
 time.sleep(0.5)
 image(x,y, 'Welcome3.jpg')
 pygame.display.update()
+time.sleep(1)
+pygame.draw.rect(gameDisplay,(0,0,255),(100,500,200,50))
+textsurface = myfont.render('Make a face!', False, (255, 255, 255))
+gameDisplay.blit(textsurface,(120,500))
+pygame.draw.rect(gameDisplay,(0,255,0),(700,500,200,50))
+textsurface = myfont.render('Make a call!', False, (255, 255, 255))
+gameDisplay.blit(textsurface,(720,500))
+pygame.draw.rect(gameDisplay,(255,0,0),(400,600,200,50))
+textsurface = myfont.render('UNKNOWN!', False, (255, 255, 255))
+gameDisplay.blit(textsurface,(420,600))
 
 while not crashed:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             crashed = True
     #image(x + 200,y + 300, faceImage)
-    
+    pygame.display.update()
     clock.tick(60)
 
 pygame.quit()
