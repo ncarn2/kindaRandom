@@ -64,10 +64,13 @@ if (operatingSystem == 'linux'):
     sound = AudioSegment.from_mp3(file)
     sound.export("quote.wav", format="wav")
 
+    print ("Playing: " + wav_file)
     mixer.init()
     mixer.music.load(wav_file)
     mixer.music.play()
 
+    mixer.quit()
+    print ("Done Playing")
 if (operatingSystem == 'win32'):
     from comtypes.client import CreateObject
     from comtypes.gen import SpeechLib
@@ -79,17 +82,17 @@ if (operatingSystem == 'win32'):
     engine.speak(quote)
     stream.Close()
 
+    print ("Playing: " + wav_file)
     mixer.init()
     mixer.music.load(os.getcwd()+'\\'+wav_file)
     mixer.music.play()
 
-print ("Playing: " + wav_file)
+    mixer.quit()
+    print ("Done Playing")
 #wav_file = "quote.wav"
 while mixer.music.get_busy():
     time.sleep(0.1) #Decrease cpu effort
 
-mixer.quit()
-print ("Done Playing")
 
 #r = sr.Recognizer()
 #with sr.AudioFile(wav_file) as source:
