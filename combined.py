@@ -47,6 +47,7 @@ import sys
 operatingSystem = sys.platform
 print ("Operating System: " + operatingSystem)
 
+mixer.init()
 
 if (operatingSystem == 'linux'):
     from gtts import gTTS
@@ -64,13 +65,10 @@ if (operatingSystem == 'linux'):
     sound = AudioSegment.from_mp3(file)
     sound.export("quote.wav", format="wav")
 
-    print ("Playing: " + wav_file)
     mixer.init()
     mixer.music.load(wav_file)
     mixer.music.play()
 
-    mixer.quit()
-    print ("Done Playing")
 if (operatingSystem == 'win32'):
     from comtypes.client import CreateObject
     
@@ -84,17 +82,16 @@ if (operatingSystem == 'win32'):
     engine.speak(quote)
     stream.Close()
 
-    print ("Playing: " + wav_file)
-    mixer.init()
     mixer.music.load(os.getcwd()+'\\'+wav_file)
     mixer.music.play()
 
-    mixer.quit()
-    print ("Done Playing")
+print ("Playing: " + wav_file)
 #wav_file = "quote.wav"
 while mixer.music.get_busy():
     time.sleep(0.1) #Decrease cpu effort
 
+mixer.quit()
+print ("Done Playing")
 
 #r = sr.Recognizer()
 #with sr.AudioFile(wav_file) as source:
