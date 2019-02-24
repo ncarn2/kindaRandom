@@ -45,7 +45,7 @@ for a in links:
 
 quote = random.choice(quotes)
 print("Random Web Quote: " + quote)
-pause = input("Press any key to continue\n")
+pause = input("Press enter to continue\n")
 
 file = "quote.mp3"
 wav_file = "quote.wav"
@@ -106,7 +106,6 @@ while mixer.music.get_busy():
 
 mixer.quit()
 print ("Done Playing")
-
 #Beginning of the twilio and Flask
 from flask import Flask
 from twilio.twiml.voice_response import VoiceResponse
