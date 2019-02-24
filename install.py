@@ -16,4 +16,7 @@ os.system("pip install SpeechRecognition")
 os.system("pip install moviepy")
 os.system("pip install ffmpeg")
 os.system("pip install comtype")
+os.system("pip install win32com")
+os.system("pip install pywin32")
+os.system("pip install pypiwin32")
 
