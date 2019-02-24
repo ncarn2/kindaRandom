@@ -1,1 +1,6 @@
 pip install unirest
+random-word
+os
+SpeechRecognition
+pydub
+gTTs
