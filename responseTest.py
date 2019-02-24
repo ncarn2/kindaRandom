@@ -5,7 +5,7 @@ from twilio.rest import Client
 app = Flask(__name__)
 
 
-lastTelephone = "Oh Hello World"
+lastTelephone = "who touch ugh my spaghet"
 
 query = ''.join(lastTelephone.split())
 
@@ -15,7 +15,7 @@ client = Client(account_sid, auth_token)
 
 call = client.calls.create (
         url = 'https://handler.twilio.com/twiml/EH06f621851a96b743015a43371effcf68?Message=' + query,  
-        to='+17205142454',
+        to='+17204510938',
         from_='+17207704132'
                 )
 
