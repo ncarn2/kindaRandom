@@ -14,7 +14,8 @@ if (operatingSystem == 'linux'):
     tts.save("good.wav")
     os.system("mpg123 good.wav")
 if (operatingSystem == 'win32'):
-    import pyttsx
-    engine = pyttsx.init()
+    import pyttsx3
+    engine = pyttsx3.init()
+
     engine.say(words)
     engine.runAndWait()
