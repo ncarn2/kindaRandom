@@ -49,12 +49,11 @@ print ("Operating System: " + operatingSystem)
 
 if (operatingSystem == 'linux'):
     from gtts import gTTS
-    tts = gTTS(text=words, lang='en')
+    tts = gTTS(text=quote, lang='en')
 
     tts.save("good.wav")
-    os.system("mpg123 good.wav")
+#    os.system("mpg123 good.wav")
 
-    tts = gTTS(text=quote, lang='en')
     tts.save(file)
 
     sound = AudioSegment.from_mp3(file)
@@ -63,6 +62,10 @@ if (operatingSystem == 'linux'):
     file = "./" + file
     sound = AudioSegment.from_mp3(file)
     sound.export("quote.wav", format="wav")
+
+    mixer.init()
+    mixer.music.load(wav_file)
+    mixer.music.play()
 
 if (operatingSystem == 'win32'):
     engine = CreateObject("SAPI.SpVoice")
@@ -76,35 +79,34 @@ if (operatingSystem == 'win32'):
     from comtypes.client import CreateObject
     from comtypes.gen import SpeechLib
 
+    mixer.init()
+    mixer.music.load(os.getcwd()+'\\'+wav_file)
+    mixer.music.play()
+
 print ("Playing: " + wav_file)
 #wav_file = "quote.wav"
-
-mixer.init()
-mixer.music.load(os.getcwd()+'\\'+wav_file)
-mixer.music.play()
-
 while mixer.music.get_busy():
     time.sleep(0.1) #Decrease cpu effort
 
 mixer.quit()
 print ("Done Playing")
 
-r = sr.Recognizer()
-with sr.AudioFile(wav_file) as source:
-    audio = r.record(source)
-
-try:
-    with open("spokenQuote Transcript.txt", "w+") as tf:
-        tf.write(r.recognize_sphinx(audio)+ "\n")
-    #t2 = time.time()
-        #print("Transcript Complete for " + str(splice))
-        #print("Time: %.2f seconds" % round(t2-t1,2))
-except sr.UnknownValueError:
-    print("Sphinx could not understand audio")
-except sr.RequestError as e:
-    print("Sphinx error; {0}".format(e))
-
-
+#r = sr.Recognizer()
+#with sr.AudioFile(wav_file) as source:
+#    audio = r.record(source)
+#
+#try:
+#    with open("spokenQuote Transcript.txt", "w+") as tf:
+#        tf.write(r.recognize_sphinx(audio)+ "\n")
+#    #t2 = time.time()
+#        #print("Transcript Complete for " + str(splice))
+#        #print("Time: %.2f seconds" % round(t2-t1,2))
+#except sr.UnknownValueError:
+#    print("Sphinx could not understand audio")
+#except sr.RequestError as e:
+#    print("Sphinx error; {0}".format(e))
+#
+#
 
 from flask import Flask
 from twilio.twiml.voice_response import VoiceResponse
@@ -115,7 +117,7 @@ app = Flask(__name__)
 
 lastTelephone = "who touch ugh my spaghet"
 
-query = ''.join(lastTelephone.split())
+query = ''.join(quote.split())
 
 account_sid = 'AC7119e83de9a686d0d56bc8491d80526a'
 auth_token = 'fcf3e5c1691051282836a49d26ff38c4'
@@ -123,7 +125,7 @@ client = Client(account_sid, auth_token)
 
 call = client.calls.create (
         url = 'https://handler.twilio.com/twiml/EH06f621851a96b743015a43371effcf68?Message=' + query,  
-        to='+17204510938',
+        to='+17203181646',
         from_='+17207704132'
                 )
 
@@ -142,5 +144,5 @@ def voice():
     return str(resp)
 
 
-if __name__ == "__main__":
-    app.run(debug=True)
+#if __name__ == "__main__":
+#    app.run(debug=True)
