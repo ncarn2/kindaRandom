@@ -65,10 +65,7 @@ if (operatingSystem == 'linux'):
     sound = AudioSegment.from_mp3(file)
     sound.export(wav_file, format="wav")
 
-<<<<<<< HEAD
-=======
     #mixer.init()
->>>>>>> 3b3e1f3d22cdd51125eab685f56d110dfc2c95a9
     mixer.music.load(wav_file)
     mixer.music.play()
 
