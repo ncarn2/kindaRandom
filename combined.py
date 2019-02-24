@@ -5,6 +5,7 @@
 #After doing this, it will call a list of people (only can call one person)
 #Twilio free trial limited us ot only calling one person :(
 #Always more random features to incorporate
+#table number 29
 
 import contextlib #To supress output of pygame import
 with contextlib.redirect_stdout(None): #Supress output of pygame import
@@ -140,7 +141,7 @@ client = Client(account_sid, auth_token)
 
 call = client.calls.create (
         url = 'https://handler.twilio.com/twiml/EH06f621851a96b743015a43371effcf68?Message=' + query,  
-#Commented out so we dont spam each other        to='+17203181646',
+        to='+17203181646',
         from_='+17207704132'
                 )
 
