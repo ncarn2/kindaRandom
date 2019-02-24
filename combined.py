@@ -17,7 +17,9 @@ with contextlib.redirect_stdout(None):
 from pydub import AudioSegment
 #from pocketsphinx import AudioFile
 import wave
+from gtts import gTTS
 
+pygame.init()
 
 #ffmpeg debugger
 #import logging
@@ -47,25 +49,23 @@ import sys
 operatingSystem = sys.platform
 print ("Operating System: " + operatingSystem)
 
-mixer.init()
+
+from gtts import gTTS
+tts = gTTS(text=quote, lang='en')
+tts.save(file)
+
+mixer.init(frequency=22050, size=-16, channels=2, buffer=-4096)
 
 if (operatingSystem == 'linux'):
-    from gtts import gTTS
-    tts = gTTS(text=quote, lang='en')
 
-    tts.save("good.wav")
-#    os.system("mpg123 good.wav")
-
-    tts.save(file)
-
-    sound = AudioSegment.from_mp3(file)
-    sound.export("quote.wav", format="wav")
+    #sound = AudioSegment.from_mp3(file)
+    #sound.export(wav_file, format="wav")
 
     file = "./" + file
     sound = AudioSegment.from_mp3(file)
-    sound.export("quote.wav", format="wav")
+    sound.export(wav_file, format="wav")
 
-    mixer.init()
+    #mixer.init()
     mixer.music.load(wav_file)
     mixer.music.play()
 
@@ -77,18 +77,19 @@ if (operatingSystem == 'win32'):
 
     from comtypes.gen import SpeechLib
 
-    stream.Open(wav_file, SpeechLib.SSFMCreateForWrite)
-    engine.AudioOutputStream = stream
-    engine.speak(quote)
-    stream.Close()
+    #stream.Open(wav_file, SpeechLib.SSFMCreateForWrite)
+    #engine.AudioOutputStream = stream
+    #engine.speak(quote)
+    #stream.Close()
 
-    mixer.music.load(os.getcwd()+'\\'+wav_file)
+    mixer.music.load(wav_file)
     mixer.music.play()
 
 print ("Playing: " + wav_file)
 #wav_file = "quote.wav"
 while mixer.music.get_busy():
     time.sleep(0.1) #Decrease cpu effort
+    print('blah')
 
 mixer.quit()
 print ("Done Playing")
