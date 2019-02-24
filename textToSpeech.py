@@ -1,18 +1,14 @@
 
-import os 
-import platform
-import sys
+import contextlib #To supress output of pygame import
+with contextlib.redirect_stdout(None): #Supress output of pygame import
+    from pygame import mixer #Playing music
+    import pygame
+from gtts import gTTS
 
-operatingSystem = sys.platform
-print ("Operating System: " + operatingSystem)
+words = 'Good morning I am a sad robittt oh whale'
+tts = gTTS(text=words, lang='en')
+tts.save("good.mp3")
 
-if (operatingSystem = 'linux'):
-    from gtts import gTTS
-    words = 'Good morning I am a sad robittt oh whale'
-    tts = gTTS(text=words, lang='en')
-
-    tts.save("good.wav")
-    os.system("mpg123 good.wav")
-if (operatingSystem = 'win32'):
-    import 
-
+mixer.init()
+mixer.music.load("good.mp3")
+mixer.music.play()
