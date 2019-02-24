@@ -21,14 +21,17 @@ clock = pygame.time.Clock()
 crashed = False
 #want this to be a random image from that website
 def getFace():
-    urllib.request.urlretrieve("https://thispersondoesnotexist.com/image", "face.png")
+    pygame.draw.rect(gameDisplay,(0,0,255),(100,500,200,50))
+    textsurface = myfont.render('Wait...!', False, (255, 255, 255))
+    gameDisplay.blit(textsurface,(120,500))
+    pygame.display.update()
     f = open('face.png', 'wb')
-    f.write(urllib.request.urlopen('https://thispersondoesnotexist.com/image').read())
+    f.write(urllib.request.urlopen(urllib.request.Request('https://thispersondoesnotexist.com/image')).read())
     f.close()
     faceImage = pygame.image.load('face.png')
 
-    x =  (display_width * 0.2)
-    y = (display_height * 0.2)
+    x =  0#(display_width * 0.2)
+    y = 0#(display_height * 0.2)
     image(x, y, faceImage)
     time.sleep(5)
 
@@ -74,11 +77,6 @@ while not crashed:
             if pos[0] > 100 and pos[0] < 300 and pos[1] > 500 and pos[1] < 550:
                 getFace()
                 pygame.display.update()
-                clock.tick(60)
-                print('argh')
-                pygame.time.delay(5000)
-                print('what')
-                pygame.draw.rect(gameDisplay, (255,255,255), (0, 0, display_width, display_height))
                 image(x,y, 'Welcome3.jpg')
                 drawButtons()
             if pos[0] > 700 and pos[0] < 900 and pos[1] > 500 and pos[1] < 550:
