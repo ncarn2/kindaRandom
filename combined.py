@@ -45,11 +45,13 @@ for a in links:
 
 quote = random.choice(quotes)
 print("Random Web Quote: " + quote)
-pause = input("Press enter to continue\n")
+
+#pause = input("Press any key to continue\n")
+
 
 file = "quote.mp3"
 wav_file = "quote.wav"
-print(file, wav_file)
+#print(file, wav_file)
 
 
 import os 
@@ -58,7 +60,7 @@ import sys
 
 #Determine what operating system the user has in order to play audio properly
 operatingSystem = sys.platform
-print ("Operating System: " + operatingSystem)
+#print ("Operating System: " + operatingSystem)
 #Have to create the files and initialize mixers for both OS's
 
 from gtts import gTTS
@@ -99,13 +101,15 @@ if (operatingSystem == 'win32'):
     speak = wincl.Dispatch("SAPI.SpVoice")
     speak.Speak(quote)
 
-print ("Playing: " + wav_file)
+#print ("Playing: " + wav_file)
 #This went to quickyl and slowed down the CPU
 while mixer.music.get_busy():
     time.sleep(0.1)
 
 mixer.quit()
-print ("Done Playing")
+
+#print ("Done Playing")
+
 #Beginning of the twilio and Flask
 from flask import Flask
 from twilio.twiml.voice_response import VoiceResponse
@@ -128,7 +132,7 @@ call = client.calls.create (
         from_='+17207704132'
                 )
 
-print(call.sid)
+print("Calling:",call.sid)
 
 @app.route("/voice", methods=['GET', 'POST'])
 def voice():
