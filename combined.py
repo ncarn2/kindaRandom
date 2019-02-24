@@ -17,8 +17,14 @@ with contextlib.redirect_stdout(None):
 from pydub import AudioSegment
 #from pocketsphinx import AudioFile
 import wave
+
 from comtypes.client import CreateObject
 from comtypes.gen import SpeechLib
+
+#ffmpeg debugger
+import logging
+
+
 url = "http://www.quotationspage.com/random.php"
 request = urllib.request.Request(url)
 html = urllib.request.urlopen(request)
@@ -48,6 +54,11 @@ stream.Close()
 
 #sound = AudioSegment.from_mp3(file)
 #sound.export("quote.wav", format="wav")
+
+#file = "./" + file
+#sound = AudioSegment.from_mp3(file)
+#sound.export("quote.wav", format="wav")
+
 
 print ("Playing: " + wav_file)
 #wav_file = "quote.wav"
