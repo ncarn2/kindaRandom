@@ -15,9 +15,10 @@ import contextlib
 with contextlib.redirect_stdout(None):
     import moviepy.editor as mpy
 from pydub import AudioSegment
-from pocketsphinx import AudioFile
+#from pocketsphinx import AudioFile
 import wave
-
+from comtypes.client import CreateObject
+from comtypes.gen import SpeechLib
 url = "http://www.quotationspage.com/random.php"
 request = urllib.request.Request(url)
 html = urllib.request.urlopen(request)
@@ -29,31 +30,44 @@ for a in links:
 
 quote = random.choice(quotes)
 print(quote)
-file = os.getcwd()+"\quote.mp3"
-wav_file = os.getcwd()+"\quote.wav"
-
+file = "quote.mp3"
+wav_file = "quote.wav"
 print(file, wav_file)
 
-tts = gTTS(text=quote, lang='en')
-tts.save(file)
 
-sound = AudioSegment.from_mp3(file)
-sound.export("quote", format="wav")
-'''
+engine = CreateObject("SAPI.SpVoice")
+stream = CreateObject("SAPI.SpFileStream")
+
+stream.Open(wav_file, SpeechLib.SSFMCreateForWrite)
+engine.AudioOutputStream = stream
+engine.speak(quote)
+stream.Close()
+
+#tts = gTTS(text=quote, lang='en')
+#tts.save(file)
+
+#sound = AudioSegment.from_mp3(file)
+#sound.export("quote.wav", format="wav")
+
+print ("Playing: " + wav_file)
+#wav_file = "quote.wav"
+
 mixer.init()
-mixer.music.load(wav_file)
+mixer.music.load(os.getcwd()+'\\'+wav_file)
 mixer.music.play()
+
 while mixer.music.get_busy():
     time.sleep(0.1) #Decrease cpu effort
 
-mixer.quit()'''
-'''
+mixer.quit()
+print ("Done Playing")
+
 r = sr.Recognizer()
 with sr.AudioFile(wav_file) as source:
-    audio = r.record(source)'''
-'''
+    audio = r.record(source)
+
 try:
-    with open("C:\\Users\\Arthur Mayer\\OneDrive\\Documents\\HackCU_V\\spokenQuote Transcript.txt", "w+") as tf:
+    with open("spokenQuote Transcript.txt", "w+") as tf:
         tf.write(r.recognize_sphinx(audio)+ "\n")
     #t2 = time.time()
         #print("Transcript Complete for " + str(splice))
@@ -62,4 +76,4 @@ except sr.UnknownValueError:
     print("Sphinx could not understand audio")
 except sr.RequestError as e:
     print("Sphinx error; {0}".format(e))
-'''
+
