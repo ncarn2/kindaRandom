@@ -6,6 +6,7 @@ with contextlib.redirect_stdout(None): #Supress output of pygame import
 from gtts import gTTS
 
 words = 'Good morning I am a sad robittt oh whale'
+
 tts = gTTS(text=words, lang='en')
 tts.save("good.mp3")
 
