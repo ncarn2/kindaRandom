@@ -67,7 +67,7 @@ def displayImage():
         textsurface = myfont.render('Make a call!', False, (255, 255, 255))
         gameDisplay.blit(textsurface,(720,500))
         pygame.draw.rect(gameDisplay,(255,0,0),(400,600,200,50))
-        textsurface = myfont.render('UNKNOWN!', False, (255, 255, 255))
+        textsurface = myfont.render('QUIT!', False, (255, 255, 255))
         gameDisplay.blit(textsurface,(420,600))
     drawButtons()
 
