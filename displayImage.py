@@ -43,13 +43,13 @@ x = display_width/5
 y = display_height/5
 image(x,y, 'Welcome.jpg')
 pygame.display.update()
-time.sleep(2)
+#time.sleep(2)
 image(x,y, 'Welcome2.jpg')
 pygame.display.update()
-time.sleep(0.5)
+#time.sleep(0.5)
 image(x,y, 'Welcome3.jpg')
 pygame.display.update()
-time.sleep(1)
+#time.sleep(1)
 pygame.draw.rect(gameDisplay,(0,0,255),(100,500,200,50))
 textsurface = myfont.render('Make a face!', False, (255, 255, 255))
 gameDisplay.blit(textsurface,(120,500))
@@ -64,6 +64,17 @@ while not crashed:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             crashed = True
+        if event.type == pygame.MOUSEBUTTONUP:
+            pos = pygame.mouse.get_pos()
+            if pos[0] > 100 and pos[0] < 300 and pos[1] > 500 and pos[1] < 550:
+                print('face')
+                #Draw face
+            if pos[0] > 700 and pos[0] < 900 and pos[1] > 500 and pos[1] < 550:
+                print('call')
+                #Make call
+            if pos[0] > 400 and pos[0] < 600 and pos[1] > 600 and pos[1] < 650:
+                print('unknown')
+                #Unknown
     #image(x + 200,y + 300, faceImage)
     pygame.display.update()
     clock.tick(60)
