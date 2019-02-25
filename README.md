@@ -8,7 +8,7 @@ Clone, Fork, or Whatever.
 
 ### Prerequisites
 
-Run the install.py to install all of the pip dependencies 
+Run the install.py after cloning to install all of the pip dependencies 
 
 ```
 python install.py
